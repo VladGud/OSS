@@ -1,0 +1,55 @@
+[vladgud@localhost test]$ ls -lR
+.:
+итого 4
+drw-rw-r--. 2 vladgud vladgud 22 Oct  1 03:53 dir
+-r--r-----. 1 vladgud vladgud  9 Oct  1 03:39 file
+-rw-------. 1 vladgud vladgud  0 Oct  1 04:03 file1
+-rw-rw-rw-. 1 vladgud vladgud  0 Oct  1 04:10 file2
+
+./dir:
+ls: невозможно получить доступ к ./dir/new_file: Отказано в доступе
+итого 0
+-????????? ? ? ? ?            ? new_file
+[vladgud@localhost test]$ history 43
+  381  cd ~
+  382  mkdir test
+  383  cd test/
+  384  touch file
+  385  ls -l
+  386  chmod 000 file
+  387  cat "тест" > file
+  388  echo "тест" > file
+  389  cat file
+  390  ll
+  391  chmod 200 file
+  392  ll
+  393  echo "тест" > file
+  394  cat "тест"
+  395  cat file
+  396  chmod 240 file
+  397  ll file 
+  398  cat file
+  399  chmod 640 file 
+  400  cat file
+  401  ls -r file
+  402  ls -l file
+  403  mkdir dir 
+  404  touch dir/new_file
+  405  echo 'file 2' > dir/new_file 
+  406  cd dir/
+  407  ls
+  408  cd ..
+  409  chmod ugo-x dir/
+  410  cat dir/new_file 
+  411  rm dir/new_file 
+  412  chown root ./dir/
+  413  chgrp root file
+  414  umask 0077 && touch file1
+  415  ll file1
+  416   umask 0000 && touch file2 && ll file2
+  417  cat file
+  418  ll file
+  419  cat file
+  420  ls -lR
+  421  history 37
+

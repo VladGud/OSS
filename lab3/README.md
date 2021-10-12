@@ -8,33 +8,33 @@
 
 1. Найдите все файлы и каталоги, имя которых содержит слово `pass`, поиск начните с корневого каталога.
 
-```sh
-find / -type d -name "*pass*" -o -type f -name "*pass*"
-```
+  ```sh
+  find / -type d -name "*pass*" -o -type f -name "*pass*"
+  ```
 
 1. Найдите все файлы и каталоги, имя которых содержит слово `pass` без учёта регистра, поиск начните с корневого каталога.
 
-```sh
-find / -type d -iname "*pass*" -o -type f -iname "*pass*"
-```
+  ```sh
+  find / -type d -iname "*pass*" -o -type f -iname "*pass*"
+  ```
 
 1. Найдите все файлы и каталоги, имя которых содержит слово `pass`, ограничив глубину поиска одним каталогом, поиск начните с корневого каталога.
 
-```sh
-find / -maxdepth 1 -type d -iname "*pass*" -o -type f -iname "*pass*"
-```
+  ```sh
+  find / -maxdepth 1 -type d -iname "*pass*" -o -type f -iname "*pass*"
+  ```
 
 1. Найдите все файлы и каталоги, имена которых оканчиваются на `.bin`. Поиск необходимо выполнить в каталоге `/home`.
 
-```sh
-find /home -type f -name "*.bin" -o -type d -name "*.bin"
-```
+  ```sh
+  find /home -type f -name "*.bin" -o -type d -name "*.bin"
+  ```
 
 1. Найдите все **файлы** (и только файлы) с расширением `bak` и удалите их.
 
-```sh
-find / -type f -name "*.bak" -delete
-```
+  ```sh
+  find / -type f -name "*.bak" -delete
+  ```
 
 1. Найдите все **файлы** (и только файлы) с расширениями `txt` и `sh`.
 

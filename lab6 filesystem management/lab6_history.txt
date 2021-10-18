@@ -1,0 +1,32 @@
+  213  ls -l /dev/sda{,[123]}
+  214  cat /proc/diskstats 
+  215  cat /proc/devices
+  216  losetup --find --show ./fs.img
+  217  losetup --list
+  218   mkfs -t ext4 /dev/loop0
+  219  blockdev --getbsz /dev/loop0
+  220  df -i
+  221  df /dev/loop0
+  222* 
+  223  df -i /dev/loop0
+  224  blkid /dev/loop0
+  225  mount /dev/loop0 /mnt
+  226  mount | grep /mnt
+  227  df -h /mnt
+  228  df -i /mnt
+  229  mount /dev/loop0 /mnt
+  230  df -i /dev/loop0
+  231  umount /dev/loop0
+  232  tune2fs -l /dev/loop0
+  233  tune2fs -i /dev/loop0
+  234  tune2fs -p /dev/loop0
+  235  tune2fs -l /dev/loop0 | grep Last mount
+  236  tune2fs -l /dev/loop0 | grep Last
+  237  tune2fs -l /dev/loop0 | grep Last
+  238  tune2fs -l /dev/loop0 | grep Inode
+  239  tune2fs -l /dev/loop0 | grep mount
+  240  tune2fs -l /dev/loop0 | grep Mount
+  241  history 50
+  242  losetup --detach /dev/loop0
+  243  losetup --list
+

@@ -1,0 +1,71 @@
+10 ps xaf
+11 ps xawf -eo pid,user,cgroup,args
+12 systemd-cgls
+13 ls -l /usr/lib/systemd/system/
+14 ls -l /run/systemd/system/
+15 ls -l /etc/systemd/system/
+16 systemctl -t help
+17 systemctl status
+18 systemctl --type=service
+19 systemctl --type=target
+20 systemctl status auditd.service
+21 systemctl is-active auditd.service
+22 systemctl is-enabled auditd.service
+23 systemctl list-dependencies --after auditd.service 
+24 systemctl list-dependencies --before auditd.service 
+25 systemctl list-units --type=service
+26 systemctl list-units --type=service --all
+27 systemctl list-units --type=socket --all
+28 systemctl list-unit-files --type=service
+29 systemctl --failed --type=service
+30 systemctl status httpd.service
+31 systemctl start httpd.service
+32 systemctl status httpd.service
+33 systemctl restart httpd.service
+34 systemctl status httpd.service
+35 systemctl stop httpd.service
+36 systemctl enable httpd.service
+37 systemctl status httpd.service 
+38 systemctl start httpd.service 
+39 systemctl status httpd.service 
+40 systemctl disable httpd.service
+41 systemctl mask httpd.service
+42 systemctl status httpd.service
+43 systemctl start httpd.service
+44 systemctl unmask httpd.service
+45 systemctl list-units --type=target
+46 systemctl list-units --type=target --all
+47 systemctl get-default 
+48 ls -l /etc/systemd/system/default.target
+49 systemctl set-default multi-user.target
+50 systemctl isolate multi-user.target
+51 systemctl --no-wall rescue
+52 systemctl --no-wall emergency
+53 systemctl poweroff
+54 systemctl halt
+55 systemctl --no-wall poweroff shutdown --poweroff 17:20
+56 shutdown --halt +1
+57 shutdown -c
+58 systemctl --no-wall reboot
+59 systemctl suspend
+60 systemctl hibernate
+61 hostnamectl 
+62 timedatectl 
+63 localectl 
+64 loginctl 
+65 loginctl session-status 2
+66 loginctl show-user user1
+67 nano mephi.service
+68 cat mephi.service 
+69 ls -lZ mephi.service
+70 journalctl -b
+71 ausearch -c 'systemd' --raw | audit2allow -M my-systemd
+72 semodule -X 300 -i my-systemd.pp
+73 ausearch -m avc -ts recent
+74 systemctl start mephi.service 
+75 journalctl -u mephi.service
+76 nano mephi.path
+77 cat mephi.path
+78 systemctl enable mephi.path 
+79 systemctl start mephi.path 
+80 touch /tmp/mephi.file

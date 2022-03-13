@@ -1,0 +1,23 @@
+  12  cd ~
+  13  ldd /bin/login | grep pam
+  14  ls -l /lib64/libpam*
+  15  ls -l /lib64/security/
+  16  vi /etc/pam.d/system-auth
+  17  vi /etc/pam.d/su
+  18  auth sufficient pam_permit.so
+  19  auth sufficient pam_permit.so
+  20  sudo auth sufficient pam_permit.so
+  21  sudo auth sufficient pam_permit.so
+  22  su
+  23  vi /etc/pam.d/su
+  24  cat /etc/pam.d/su
+  25  nano /etc/pam.d/su
+  26  sudo nano /etc/pam.d/su
+  27  exit
+  28  touch script.c
+  29  gcc script.c -o script -lpam -lpam_misc
+  30  sudo gcc script.c -o script -lpam -lpam_misc
+  31  gcc script.c -o script -lpam -lpam_misc
+  32  cd /etc/pam.d/
+  33  ls
+  34  history > history.txt

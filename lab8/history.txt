@@ -14,10 +14,24 @@
   25  nano /etc/pam.d/su
   26  sudo nano /etc/pam.d/su
   27  exit
-  28  touch script.c
-  29  gcc script.c -o script -lpam -lpam_misc
-  30  sudo gcc script.c -o script -lpam -lpam_misc
-  31  gcc script.c -o script -lpam -lpam_misc
-  32  cd /etc/pam.d/
-  33  ls
-  34  history > history.txt
+  28  useradd -G wheel -p password -s /bin/bash vladun
+  29  nano /etc/pam.d/su
+  30  nano /etc/pam.d/su
+  31  cat /etc/securetty
+  32  touch /etc/securetty
+  33  nano /etc/pam.d/login
+  34  nano /etc/pam.d/login
+  35  man pam_pwquality
+  36  nano /etc/security/pwquality.conf
+  37  nano /etc/pam.d/system-auth
+  38  man pam_limits
+  39  nano /etc/security/limits.conf
+  40  sudo passwd vladun
+  41  touch script.c
+  42  gcc script.c -o script -lpam -lpam_misc
+  43  sudo gcc script.c -o script -lpam -lpam_misc
+  44  gcc script.c -o script -lpam -lpam_misc
+  45  cd /etc/pam.d/
+  46  ls
+  47  nano /etc/security/limits.conf
+  48  history > history.txt

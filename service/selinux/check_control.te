@@ -1,0 +1,46 @@
+policy_module(check_control, 1.0)
+
+type check_control_t;
+type check_control_exec_t;
+
+require {
+	type shadow_t;
+	type check_control_t;
+	type admin_home_t;
+	type usr_t;
+	class capability chown;
+	class unix_stream_socket connectto;
+	class file { open read getattr setattr write };
+	type kernel_t;
+        type bin_t;
+        type init_t;
+        type passwd_file_t;
+        type proc_t;
+}
+
+type check_control_t;
+type check_control_exec_t;
+
+init_daemon_domain(check_control_t, check_control_exec_t)
+
+permissive check_control_t;
+
+allow check_control_t kernel_t:unix_stream_socket connectto;
+
+allow check_control_t bin_t:file { setattr execute execute_no_trans };
+allow check_control_t init_t:file { getattr open read };
+
+allow check_control_t etc_t:file { open read setattr getattr };
+allow check_control_t passwd_file_t:file { open read getattr setattr };
+allow check_control_t proc_t:file { open read getattr setattr };
+allow check_control_t shadow_t:file { open read getattr setattr };
+
+allow check_control_t admin_home_t:file { getattr setattr };
+allow check_control_t self:capability chown;
+allow check_control_t usr_t:file write;
+
+domain_use_interactive_fds(check_control_t)
+
+files_read_etc_files(check_control_t)
+
+miscfiles_read_localization(check_control_t)

@@ -1,0 +1,74 @@
+#!/bin/bash
+
+CONF=/etc/check_control.conf
+IFS=":"
+TIMEOUT=60
+PID_FILE=/opt/check_control/check_control.pid
+
+echo $$ > $PID_FILE
+
+function trace {
+    systemd-cat echo $1
+}
+
+if [ ! -f "$CONF" ]; then
+    trace "CHECK_CONTROL_SERVICE: FILE $CONF DOES NOT EXIST"
+    exit 1
+fi
+
+function validateOwner {
+    currentFileOwner=$( stat $FILE_NAME -c %U )
+    if [[ $currentFileOwner != $VALID_OWNER ]]
+    then
+        trace "CHECK_CONTROL_SERVICE: WARNING! $FILE_NAME HAD GOT NOT A VALID OWNER ($currentFileOwner). CHANGED TO $VALID_OWNER" 
+        chown $VALID_OWNER $FILE_NAME
+    fi
+}
+
+function validateGroup {
+    currentFileGroup=$( stat $FILE_NAME -c %G )
+    if [[ $currentFileGroup != $VALID_GROUP ]]
+    then
+        trace "CHECK_CONTROL_SERVICE: WARNING! $FILE_NAME HAD GOT NOT A VALID GROUP ($currentFileGroup). CHANGED TO $VALID_GROUP" 
+        chgrp $VALID_GROUP $FILE_NAME
+    fi
+}
+
+function validatePermissions {
+    currentFilePermissions=$( stat $FILE_NAME -c %a )
+    if [[ $currentFilePermissions != $VALID_PERM ]]
+    then
+        trace "CHECK_CONTROL_SERVICE: WARNING! $FILE_NAME HAD GOT NOT A VALID PERMISSIONS ($currentFilePermissions). CHANGED TO $VALID_PERM"
+        chmod $VALID_PERM $FILE_NAME
+    fi
+}
+
+function service {
+    trace "CHECK_CONTROL_SERVICE: begin scan"
+    while read FILE_NAME VALID_PERM VALID_OWNER VALID_GROUP
+    do
+        validateOwner $FILE_NAME $VALID_OWNER
+        validateGroup $FILE_NAME $VALID_GROUP
+        validatePermissions $FILE_NAME $VALID_PERM
+    done < $CONF
+    trace "CHECK_CONTROL_SERVICE: complete scan"
+}
+
+function onSignal {
+    trace "SIGUSR1"
+    service
+}
+
+function onExit {
+    trace "exit"
+}
+
+trap "onSignal" SIGUSR1
+trap "onExit" EXIT
+
+while true
+do
+    trace "SERVICE START"
+    wait && service
+    sleep $TIMEOUT &
+done

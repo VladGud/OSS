@@ -1,0 +1,14 @@
+[Unit]
+Description=check_control
+
+[Service]
+Type=simple
+PIDFile=/opt/check_control/service.pid
+User=root
+Group=root
+OOMScoreAdjust=-100
+Restart=always
+ExecStart=/opt/check_control/check_control
+
+[Install]
+WantedBy=multi-user.target

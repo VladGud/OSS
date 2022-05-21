@@ -1,0 +1,40 @@
+
+## <summary>policy for check_control</summary>
+
+########################################
+## <summary>
+##	Execute test_exec_t in the test domain.
+## </summary>
+## <param name="domain">
+## <summary>
+##	Domain allowed to transition.
+## </summary>
+## </param>
+#
+interface(`test_domtrans',`
+	gen_require(`
+		type check_control_t, check_control_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	domtrans_pattern($1, check_control_exec_t, check_control_t)
+')
+
+######################################
+## <summary>
+##	Execute test in the caller domain.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`check_control_exec',`
+	gen_require(`
+		type check_control_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	can_exec($1, check_control_exec_t)
+')
